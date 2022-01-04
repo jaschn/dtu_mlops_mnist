@@ -22,7 +22,7 @@ def process_train(input, output):
         # convert from (count, 28x28) to (count, 1 channel, 28x28)
         images = im.view(im.size(0), 1, im.size(1), im.size(2))
         labels = torch.from_numpy(f["labels"]).long()
-    for i in range(1, 5):
+    for i in range(1, 8):
         with np.load(os.path.join(base_path, f"train_{i}.npz")) as f:
             im = torch.from_numpy(f["images"]).float()
             im = im.view(im.size(0), 1, im.size(1), im.size(2))
