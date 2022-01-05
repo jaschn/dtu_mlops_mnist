@@ -39,14 +39,14 @@ lint:
 	flake8 src
 
 #training the model
-train: data
-	$(PYTHON_INTERPRETER) src/models/train_model.py data/processed/mnist reports/figures models
+train:
+	$(PYTHON_INTERPRETER) src/models/train_model.py
 
 predict_images:
-	$(PYTHON_INTERPRETER) src/models/predict_model.py models data/processed/mnist reports/figures
+	$(PYTHON_INTERPRETER) src/models/predict_model.py
 
 visualize:
-	$(PYTHON_INTERPRETER) src/visualization/visualize.py models data/processed/mnist reports/figures
+	$(PYTHON_INTERPRETER) src/visualization/visualize.py
 
 ## Upload Data to S3
 sync_data_to_s3:

@@ -1,0 +1,11 @@
+defaults:
+  - model_conf
+  - _self_
+
+training:
+  input_filepath: data/processed/mnist 
+  output_filepath_figure: reports/figures 
+  output_filepath_model: models
+  lr: 0.001
+  epochs: 10
+

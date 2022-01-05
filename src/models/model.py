@@ -2,16 +2,28 @@ from torch import nn
 
 
 class MyAwesomeModel(nn.Module):
-    def __init__(self):
+    def __init__(self, cfg):
         super().__init__()
 
         self.cnn = nn.Sequential(
-            nn.Conv2d(in_channels=1, out_channels=5, kernel_size=3),
+            nn.Conv2d(
+                in_channels=cfg.in_channels,
+                out_channels=cfg.h1_cnn_channels,
+                kernel_size=3,
+            ),
             nn.ReLU(),
-            nn.Conv2d(in_channels=5, out_channels=3, kernel_size=3, stride=2),
+            nn.Conv2d(
+                in_channels=cfg.h1_cnn_channels,
+                out_channels=cfg.h2_cnn_channels,
+                kernel_size=3,
+                stride=2,
+            ),
         )
         self.fc = nn.Sequential(
-            nn.Linear(432, 100), nn.ReLU(), nn.Linear(100, 10), nn.LogSoftmax(dim=1)
+            nn.Linear(432, cfg.h3_lin_channels),
+            nn.ReLU(),
+            nn.Linear(cfg.h3_lin_channels, cfg.out_channels),
+            nn.LogSoftmax(dim=1),
         )
 
     def forward(self, x):

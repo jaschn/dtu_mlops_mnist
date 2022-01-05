@@ -3,7 +3,7 @@ import logging
 import os
 from pathlib import Path
 
-import click
+import hydra
 import matplotlib.pyplot as plt
 import torch
 from dotenv import find_dotenv, load_dotenv
@@ -12,16 +12,16 @@ from src.data.dataset import mnist
 from src.models.model import MyAwesomeModel
 
 
-@click.command()
-@click.argument("model_filepath", type=click.Path(exists=True))
-@click.argument("image_path", type=click.Path(exists=True))
-@click.argument("prediction_path", type=click.Path(exists=True))
-@click.option("--cnt", default=10, type=int)
-def main(model_filepath, image_path, prediction_path, cnt):
+@hydra.main(config_path="./../../config", config_name="prediction_conf.yaml")
+def main(cfg):
+    model_filepath = os.path.join(hydra.utils.get_original_cwd(), cfg.model_filepath)
+    image_path = os.path.join(hydra.utils.get_original_cwd(), cfg.image_path)
+    prediction_path = cfg.prediction_path
+    cnt = int(cfg.cnt)
     logger = logging.getLogger(__name__)
     logger.info("making final data set from raw data")
     model_states = torch.load(os.path.join(model_filepath, "trained_model.pt"))
-    model = MyAwesomeModel()
+    model = MyAwesomeModel(cfg.model)
     model.load_state_dict(model_states)
     train_set = mnist(image_path, "test")
     images, labels = next(iter(train_set))
@@ -29,7 +29,7 @@ def main(model_filepath, image_path, prediction_path, cnt):
     ps = out.exp()
     _, top_class = ps.topk(1, dim=1)
     os.makedirs(prediction_path, exist_ok=True)
-    for i, image in enumerate(images[:10]):
+    for i, image in enumerate(images[:cnt]):
         plt.imshow(image[0], cmap="gray")
         plt.title(f"Prediction: {top_class[i].item()}, Label:{labels[i]}")
         plt.tick_params(axis="both", length=0)

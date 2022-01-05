@@ -1,0 +1,8 @@
+defaults:
+  - model_conf
+  - _self_
+
+model_filepath: models
+image_path: data/processed/mnist
+prediction_path: reports/figures
+cnt: 10

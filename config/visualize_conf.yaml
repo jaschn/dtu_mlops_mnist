@@ -1,0 +1,7 @@
+defaults:
+  - model_conf
+  - _self_
+
+model_filepath: models
+image_path: data/processed/mnist
+visualize_path: reports/figures

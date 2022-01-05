@@ -3,7 +3,7 @@ import logging
 import os
 from pathlib import Path
 
-import click
+import hydra
 import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
@@ -14,13 +14,8 @@ from src.data.dataset import mnist
 from src.models.model import MyAwesomeModel
 
 
-@click.command()
-@click.argument("input_filepath", type=click.Path(exists=True))
-@click.argument("output_filepath_figure", type=click.Path())
-@click.argument("output_filepath_model", type=click.Path())
-@click.option("--lr", default=0.001, type=float)
-@click.option("--epochs", default=10, type=int)
-def main(input_filepath, output_filepath_figure, output_filepath_model, lr, epochs):
+@hydra.main(config_path="./../../config", config_name="training_conf.yaml")
+def main(cfg):
     """
     Trains the model
 
@@ -34,9 +29,18 @@ def main(input_filepath, output_filepath_figure, output_filepath_model, lr, epoc
             Returns:
                     binary_sum (str): Binary string of the sum of a and b
     """
+    input_filepath = os.path.join(
+        hydra.utils.get_original_cwd(), cfg.training.input_filepath
+    )
+    output_filepath_figure = cfg.training.output_filepath_figure
+    output_filepath_model = os.path.join(
+        hydra.utils.get_original_cwd(), cfg.training.output_filepath_model
+    )
+    lr = cfg.training.lr
+    epochs = cfg.training.epochs
     logger = logging.getLogger(__name__)
-    logger.info("making final data set from raw data")
-    model = MyAwesomeModel()
+    logger.info("train model")
+    model = MyAwesomeModel(cfg.model)
     critirion = nn.NLLLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
     train_set = mnist(input_filepath, "train")
