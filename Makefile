@@ -43,10 +43,10 @@ train: data
 	$(PYTHON_INTERPRETER) src/models/train_model.py data/processed/mnist reports/figures models
 
 predict_images:
-	$(PYTHON_INTERPRETER) src/models/predict_model.py models data/processed/mnist reports/predictions
+	$(PYTHON_INTERPRETER) src/models/predict_model.py models data/processed/mnist reports/figures
 
 visualize:
-	$(PYTHON_INTERPRETER) src/visualization/visualize.py models data/processed/mnist reports/visualize
+	$(PYTHON_INTERPRETER) src/visualization/visualize.py models data/processed/mnist reports/figures
 
 ## Upload Data to S3
 sync_data_to_s3:

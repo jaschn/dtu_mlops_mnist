@@ -61,6 +61,7 @@ def main(model_filepath, image_path, visualize_path):
         legend="full",
         alpha=0.3,
     )
+    os.makedirs(visualize_path, exist_ok=True)
     plt.savefig(os.path.join(visualize_path, "visual.png"))
 
 

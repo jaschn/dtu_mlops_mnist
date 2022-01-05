@@ -54,7 +54,10 @@ def main(input_filepath, output_filepath_figure, output_filepath_model, lr, epoc
     plt.plot(losses, label="Loss")
     plt.legend()
     plt.title("Loss")
+    os.makedirs(output_filepath_figure, exist_ok=True)
     plt.savefig(os.path.join(output_filepath_figure, "loss.png"))
+
+    os.makedirs(output_filepath_model, exist_ok=True)
     torch.save(
         model.state_dict(), os.path.join(output_filepath_model, "trained_model.pt")
     )

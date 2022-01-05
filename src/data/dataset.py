@@ -29,5 +29,5 @@ class CorruptMNISTset(Dataset):
 
 def mnist(path, type="train"):
     set = CorruptMNISTset(path, type=type)
-    loader = DataLoader(set, batch_size=64, shuffle=True, num_workers=8)
+    loader = DataLoader(set, batch_size=64, shuffle=True)
     return loader

@@ -28,6 +28,7 @@ def main(model_filepath, image_path, prediction_path, cnt):
     out = model(images)
     ps = out.exp()
     _, top_class = ps.topk(1, dim=1)
+    os.makedirs(prediction_path, exist_ok=True)
     for i, image in enumerate(images[:10]):
         plt.imshow(image[0], cmap="gray")
         plt.title(f"Prediction: {top_class[i].item()}, Label:{labels[i]}")
