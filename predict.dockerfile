@@ -15,3 +15,5 @@ WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 
 ENTRYPOINT ["python", "-u", "src/models/predict_model.py", "models", "data/processed/mnist", "reports/figures"]
+
+#command: docker run --name predict -v $(pwd)/reports:/reports -v $(pwd)/models:/models predict:latest

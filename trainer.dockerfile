@@ -15,3 +15,5 @@ WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 
 ENTRYPOINT ["python", "-u", "src/models/train_model.py", "data/processed/mnist", "reports/figures", "models"]
+
+#command: docker run --name train -v $(pwd)/reports:/reports -v $(pwd)/models:/model trainer:latest
