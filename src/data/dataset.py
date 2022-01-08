@@ -11,7 +11,7 @@ class CorruptMNISTset(Dataset):
         elif type == "test":
             path = os.path.join(base_path, "test")
         else:
-            assert "wrong option"
+            assert False, "wrong option"
 
         self.images = torch.load(os.path.join(path, "images.pt"))
         self.labels = torch.load(os.path.join(path, "labels.pt"))
