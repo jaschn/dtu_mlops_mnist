@@ -1,4 +1,4 @@
-name: "isort"
+name: "flake8"
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: 3.8
         cache: 'pip'
-    - name: Test with isort
+    - name: Test with flake8
       run: |
-        pip install isort
-        isort -c .
+        pip install flake8
+        flake8 src/ tests/
