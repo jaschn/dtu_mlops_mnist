@@ -1,24 +1,27 @@
+import math
+
 import hydra
-from src.models.model import MyAwesomeModel
 import torch.nn as nn
 import torch.optim as optim
-import math
 import torchvision
 from torch.utils.data import DataLoader
-import torch
+
+from src.models.model import MyAwesomeModel
+
 
 def test_training():
     with hydra.initialize(config_path="../config"):
         cfg = hydra.compose(config_name="training_conf.yaml")
 
-    input_filepath = cfg.training.input_filepath
     lr = cfg.training.lr
     epochs = 5
 
     model = MyAwesomeModel(cfg.model)
     critirion = nn.NLLLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
-    train_set = torchvision.datasets.MNIST("data",transform=torchvision.transforms.ToTensor(), download=True, train=True)
+    train_set = torchvision.datasets.MNIST(
+        "data", transform=torchvision.transforms.ToTensor(), download=True, train=True
+    )
     train_loader = DataLoader(train_set, batch_size=64)
     losses = []
     for _ in range(epochs):
