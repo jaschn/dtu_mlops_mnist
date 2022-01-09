@@ -1,5 +1,5 @@
-import torchvision
 import pytest
+import torchvision
 
 
 @pytest.mark.parametrize("type, cnt", [(True, 60000), (False, 10000)])
