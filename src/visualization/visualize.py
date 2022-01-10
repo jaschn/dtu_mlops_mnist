@@ -4,11 +4,11 @@ import os
 from pathlib import Path
 
 import hydra
-import matplotlib.pyplot as plt
-import seaborn as sns
+import matplotlib.pyplot as plt  # type: ignore
+import seaborn as sns  # type: ignore
 import torch
 from dotenv import find_dotenv, load_dotenv
-from sklearn.manifold import TSNE
+from sklearn.manifold import TSNE  # type: ignore
 
 from src.data.dataset import mnist
 from src.models.model import MyAwesomeModel

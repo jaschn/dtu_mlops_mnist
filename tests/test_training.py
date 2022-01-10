@@ -3,7 +3,7 @@ import math
 import hydra
 import torch.nn as nn
 import torch.optim as optim
-import torchvision
+import torchvision  # type: ignore
 from torch.utils.data import DataLoader
 
 from src.models.model import MyAwesomeModel

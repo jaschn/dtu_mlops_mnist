@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 import hydra
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # type: ignore
 import torch
 import torch.nn as nn
 import torch.optim as optim

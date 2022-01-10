@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 import hydra
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt  # type: ignore
 import torch
 from dotenv import find_dotenv, load_dotenv
 
